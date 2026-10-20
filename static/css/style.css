@@ -1,0 +1,130 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #fff0f6;
+    color: #71344f;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px 30px;
+    background: #ffffff;
+    border: 1px solid #f4d4e2;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(139, 55, 93, 0.13);
+}
+
+.icone {
+    margin-bottom: 10px;
+    color: #bd5685;
+    font-size: 48px;
+}
+
+h1 {
+    margin: 0 0 14px;
+    color: #a83f70;
+    font-size: 30px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.botao {
+    display: block;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    background: #bd5685;
+    color: #ffffff;
+}
+
+.botao:hover {
+    background: #963d67;
+}
+
+.botao:focus-visible {
+    outline: 3px solid #49323d;
+    outline-offset: 3px;
+}
+
+.secundario {
+    background: #f8e4ed;
+    color: #71344f;
+}
+
+footer {
+    margin-top: 28px;
+    color: #79636e;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}
+
+/* Campos do formulário de agendamento */
+form label {
+    display: block;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #71344f;
+    text-align: left;
+}
+
+form input,
+form select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #e2b7ca;
+    border-radius: 10px;
+    background: #fffafd;
+    color: #49323d;
+    font-size: 16px;
+}
+
+form input:focus-visible,
+form select:focus-visible {
+    outline: 3px solid #963d67;
+    outline-offset: 2px;
+}
+
+form button {
+    width: 100%;
+    min-height: 48px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}

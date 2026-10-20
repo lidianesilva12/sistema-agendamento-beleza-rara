@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão Beleza Rara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <div class="icone" aria-hidden="true">✿</div>
+
+        <h1>Salão Beleza Rara</h1>
+
+        <p>Seu momento de beleza começa aqui!</p>
+        <p>Escolha uma opção para continuar.</p>
+
+        
+<nav class="menu" aria-label="Menu principal">
+    <a class="botao" href="{{ url_for('agendar') }}">Agendar horário</a>
+    <a class="botao secundario" href="{{ url_for('meus_agendamentos') }}">Meus agendamentos</a>
+    <a class="botao secundario" href="#">Área da proprietária</a>
+</nav>
+
+
+        <footer>
+            Beleza, carinho e cuidado em cada detalhe.
+        </footer>
+    </main>
+</body>
+</html>

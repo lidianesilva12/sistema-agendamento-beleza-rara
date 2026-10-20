@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar horário - Salão Beleza Rara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1>Agende seu horário 🌸</h1>
+        <p>Preencha os dados para solicitar seu atendimento.</p>
+
+        <form action="{{ url_for('agendar') }}" method="POST">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" required>
+
+            <label for="servico">Serviço desejado</label>
+            <select id="servico" name="servico" required>
+                <option value="">Selecione um serviço</option>
+                <option value="Progressiva">Progressiva</option>
+                <option value="Corte">Corte</option>
+                <option value="Hidratação">Hidratação</option>
+                <option value="Escova">Escova</option>
+            </select>
+
+            <label for="data">Data do atendimento</label>
+            <input type="date" id="data" name="data" required>
+
+            <label for="horario">Horário</label>
+            <select id="horario" name="horario" required>
+                <option value="">Selecione um horário</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+            </select>
+
+            <button type="submit" class="botao principal">
+                Confirmar agendamento
+            </button>
+        </form>
+
+        <p><a href="{{ url_for('inicio') }}">Voltar ao início</a></p>
+    </main>
+</body>
+</html>

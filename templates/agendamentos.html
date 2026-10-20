@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus agendamentos - Beleza Rara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1>Meus agendamentos</h1>
+
+        {% if agendamentos %}
+            {% for a in agendamentos %}
+                <section>
+                    <p><strong>Cliente:</strong> {{ a.nome }}</p>
+                    <p><strong>Serviço:</strong> {{ a.servico }}</p>
+                    <p><strong>Data:</strong> {{ a.data }}</p>
+                    <p><strong>Horário:</strong> {{ a.horario }}</p>
+                    <p><strong>Status:</strong> {{ a.status }}</p>
+                    <hr>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum agendamento registrado nesta sessão.</p>
+        {% endif %}
+
+        <a class="botao" href="{{ url_for('agendar') }}">Novo agendamento</a>
+        <p><a href="{{ url_for('inicio') }}">Voltar ao início</a></p>
+    </main>
+</body>
+</html>
