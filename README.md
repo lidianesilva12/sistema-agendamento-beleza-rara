@@ -108,3 +108,21 @@ O projeto foi pensado para apoiar a organização dos atendimentos do Salão Bel
 ## Status
 
 Projeto em desenvolvimento acadêmico. Novas melhorias e validações poderão ser incorporadas nas próximas etapas.
+## Qualidade e validação
+
+O projeto possui testes automatizados desenvolvidos com pytest para verificar as principais funcionalidades do sistema.
+
+Os testes verificam:
+- A abertura da página inicial.
+- O cadastro de agendamentos.
+- O bloqueio de horários duplicados.
+- O cancelamento de agendamentos.
+- A validação dos campos obrigatórios.
+
+Para executar os testes localmente, utilize:
+
+```bash
+python -m pytest -v
+```
+
+A execução automatizada também é realizada pelo GitHub Actions, permitindo verificar os testes a cada atualização enviada ao repositório.
