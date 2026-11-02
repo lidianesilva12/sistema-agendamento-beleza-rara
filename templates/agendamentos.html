@@ -11,6 +11,18 @@
     <main class="container">
         <h1>Meus agendamentos</h1>
 
+        <form method="GET" action="{{ url_for('meus_agendamentos') }}">
+            <label for="data">Consultar agendamentos por data:</label>
+            <input
+                type="date"
+                id="data"
+                name="data"
+                value="{{ request.args.get('data', '') }}"
+            >
+            <button type="submit">Filtrar</button>
+            <a class="botao" href="{{ url_for('meus_agendamentos') }}">Limpar filtro</a>
+        </form>
+
         {% if agendamentos %}
             {% for a in agendamentos %}
                 <section>
@@ -23,7 +35,7 @@
                 </section>
             {% endfor %}
         {% else %}
-            <p>Nenhum agendamento registrado nesta sessão.</p>
+            <p>Nenhum agendamento encontrado para esta consulta.</p>
         {% endif %}
 
         <a class="botao" href="{{ url_for('agendar') }}">Novo agendamento</a>

@@ -65,11 +65,22 @@ def agendar():
 
 @app.route("/agendamentos")
 def meus_agendamentos():
-    lista = Agendamento.query.order_by(
-        Agendamento.data, Agendamento.horario
+    data_filtro = request.args.get("data", "").strip()
+
+    consulta = Agendamento.query
+
+    if data_filtro:
+        consulta = consulta.filter_by(data=data_filtro)
+
+    lista = consulta.order_by(
+        Agendamento.data,
+        Agendamento.horario
     ).all()
 
-    return render_template("agendamentos.html", agendamentos=lista)
+    return render_template(
+        "agendamentos.html",
+        agendamentos=lista
+    )
 
 
 @app.route("/cancelar/<int:id>", methods=["POST"])
