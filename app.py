@@ -1,16 +1,38 @@
 
+import os
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///beleza_rara.db"
+# Configuração do banco de dados
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace(
+            "postgres://",
+            "postgresql+psycopg://",
+            1
+        )
+    elif DATABASE_URL.startswith("postgresql://"):
+        DATABASE_URL = DATABASE_URL.replace(
+            "postgresql://",
+            "postgresql+psycopg://",
+            1
+        )
+else:
+    DATABASE_URL = "sqlite:///beleza_rara.db"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
 
+# Modelo de agendamento
 class Agendamento(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -21,11 +43,13 @@ class Agendamento(db.Model):
     status = db.Column(db.String(20), default="Confirmado")
 
 
+# Página inicial
 @app.route("/")
 def inicio():
     return render_template("index.html")
 
 
+# Cadastro de agendamento
 @app.route("/agendar", methods=["GET", "POST"])
 def agendar():
     if request.method == "POST":
@@ -45,9 +69,12 @@ def agendar():
         ).first()
 
         if conflito:
-            return "Este horário já está ocupado. Escolha outro horário.", 400
+            return (
+                "Este horário já está ocupado. Escolha outro horário.",
+                400
+            )
 
-        novo = Agendamento(
+        novo_agendamento = Agendamento(
             nome=nome,
             telefone=telefone,
             servico=servico,
@@ -55,7 +82,7 @@ def agendar():
             horario=horario
         )
 
-        db.session.add(novo)
+        db.session.add(novo_agendamento)
         db.session.commit()
 
         return redirect(url_for("meus_agendamentos"))
@@ -63,6 +90,7 @@ def agendar():
     return render_template("agendar.html")
 
 
+# Consulta de agendamentos com filtro por data
 @app.route("/agendamentos")
 def meus_agendamentos():
     data_filtro = request.args.get("data", "").strip()
@@ -83,6 +111,7 @@ def meus_agendamentos():
     )
 
 
+# Cancelamento de agendamento
 @app.route("/cancelar/<int:id>", methods=["POST"])
 def cancelar(id):
     agendamento = db.session.get(Agendamento, id)
@@ -96,9 +125,11 @@ def cancelar(id):
     return redirect(url_for("meus_agendamentos"))
 
 
+# Criação das tabelas do banco de dados
 with app.app_context():
     db.create_all()
 
 
+# Execução local
 if __name__ == "__main__":
     app.run(debug=True)
